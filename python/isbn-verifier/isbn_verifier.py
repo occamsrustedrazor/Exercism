@@ -12,15 +12,12 @@ def is_valid(isbn):
         else: 
             num_list.append(int(i))
 
-    #Check if "X" existed anywhere except -1 and that there are only 10 digits
+    #Check if "10" exists anywhere except -1 and that there are only 10 numbers
     if 10 in num_list[:-2] or len(num_list) != 10:
         return False
 
     # Validate Checksum
-    if (num_list[0] * 10 + num_list[1] * 9 + num_list[2] * 8 + 
-        num_list[3] * 7 +  num_list[4] * 6 + num_list[5] * 5 + 
-        num_list[6] * 4 +  num_list[7] * 3 + num_list[8] * 2 + 
-        num_list[9] * 1) % 11 == 0:
-        return True
-    else:
-        return False
+    total = 0
+    for i in range(10):
+        total += num_list[i] * (10-i)
+    return total % 11 == 0
